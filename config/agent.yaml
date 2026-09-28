@@ -1,0 +1,32 @@
+# Agent Manifest — AgentRegistry entry point
+# AgentRegistry reads every key below at ROOT level — do NOT nest under an `agent:`
+# block. Runtime parameters live in config/config.yaml, never in this manifest —
+# the manifest carries static registry metadata only.
+id: "CMN-C1-084"
+name: "AI Agent Lifecycle & Governance Policy Q&A Agent"
+namespace: "cmn"
+version: "1.0.0"
+enabled: true
+category: "Cat 1"
+# Static generation contract: deterministic | llm（未宣言は deterministic 既定）.
+# 既定ビルドは LLM を一度も呼ばないため deterministic が真。
+# 理由: src/agent.py が MainNode() を引数なしで構築するため、config から LLM へ到達する経路が無い。
+# LLM は opt-in シーム（LLMClient.generate(query=, context=, risk_label=)）として残っており、派生テンプレが実装を供給したときに有効になる。
+# その配線を入れたら llm へ変更し、実 LLM 1回転チェックを通すこと。
+generation_mode: "deterministic"  # deterministic | llm
+industry: "CMN"
+
+# Opaque compatibility metadata. Not an inheritance selector.
+base_type: "ChatAgent"
+
+# Entry point — a single dotted import path (module.Class), NOT split module:/class:.
+class: "src.agent.GovernancePolicyQAAgent"
+
+# Security
+required_trust_level: "VERIFIED_EXTERNAL"
+
+# Compile-time gates (require_at_compile). Declare every secret obtained through an
+# unguarded ctx.secrets.require(), and every extra that must exist in EXTRAS_MAP.
+requires:
+  secrets: []
+  extras: []

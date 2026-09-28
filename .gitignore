@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+.env
+*.egg
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+
+# CoE-distributed reference files — must not be committed (criterion #14)
+# Kept locally for reference; ignored so gate-scaffold-integrity passes.
+CLAUDE.md
+security_rules/
+STG_RUNBOOK.md
+DEV_CREDENTIAL_PROVISIONING.md
+MANIFEST.md
+ci_stubs/
+# CI 生成の advisory 成果物（reuse-telemetry ジョブの artifact）
+reuse_telemetry/

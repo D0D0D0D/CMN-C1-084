@@ -1,0 +1,36 @@
+# Runtime parameters — loaded separately from the static manifest and passed
+# as Graph(config=...). The static manifest (config/agent.yaml) carries registry
+# metadata only; every runtime-tunable parameter belongs in this file.
+
+max_retry: 3
+timeout_seconds: 30
+source_allowlist:
+- url: https://www.fsa.go.jp/policy/
+  title: FSA — Financial Services Agency policy
+  topics:
+  - compliance
+  - risk
+- url: https://www.iso.org/standard/81230.html
+  title: ISO/IEC 42001 — AI management system
+  topics:
+  - compliance
+  - risk
+  - deployment
+- url: https://www.meti.go.jp/policy/mono_info_service/ai/
+  title: METI — AI governance guidelines
+  topics:
+  - compliance
+  - deployment
+  - data
+# An adopter's internal governance wiki belongs here, and because its topics
+# are "all" it is selected for every question. The placeholder below uses an
+# RFC 2606 example.com host, which can never resolve: leaving it enabled made
+# every request spend a DNS attempt on a host that is guaranteed absent.
+# Uncomment and point it at the real wiki when deploying.
+# - url: https://governance.internal.example.com/wiki/agent-lifecycle
+#   title: Internal governance wiki — agent lifecycle policy
+#   topics:
+#   - all
+fetch:
+  cache_ttl_seconds: 600
+  per_host_min_interval_s: 1.0

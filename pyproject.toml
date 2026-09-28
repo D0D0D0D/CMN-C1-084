@@ -1,0 +1,36 @@
+[project]
+name = "cmn-c1-084"
+version = "1.0.0"
+description = "AI Agent Lifecycle & Governance Policy Q&A Agent — AgentCore Template"
+requires-python = ">=3.11"
+dependencies = [
+    "agenticstar-agentcore[marketplace,openai]==1.0.3",]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.1.1",
+    "pytest-cov==5.0.0",
+    "pytest-asyncio==0.23.6",
+    "ruff==0.4.4",
+    "mypy==1.10.0",
+]
+
+[build-system]
+requires = ["setuptools==68.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/proof_of_boundary/test_import_isolation.py" = ["F541"]
+"tests/proof_of_boundary/test_state_safety.py" = ["F541"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
